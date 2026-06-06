@@ -2,17 +2,26 @@ import dotenv from 'dotenv'
 dotenv.config()
 import express from 'express'
 import mongoose  from 'mongoose'
+import authRouter from './routes/auth.js'
 import cors from 'cors'
 const app = express()
 app.use(cors())
 
 
-mongoose.connect(process.env.DB_URI).then(()=>{
-    console.log("db connected ")
-}).catch((err)=>{
-    console.log(err.message)
-})
+// mongoose.connect(process.env.DB_URI).then(()=>{
+//     console.log("db connected ")
+// }).catch((err)=>{
+//     console.log(err.message)
+// })
 
+
+
+// app.post("/auth/signup",(req,res)=>{
+//     console.log("api hitting directly")
+
+// })
+
+app.use("/auth",authRouter)
 
 const port=process.env.port
 app.listen(port,()=>{
