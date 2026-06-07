@@ -7,12 +7,14 @@ import cors from 'cors'
 const app = express()
 app.use(cors())
 
+app.use(express.json()); 
 
-// mongoose.connect(process.env.DB_URI).then(()=>{
-//     console.log("db connected ")
-// }).catch((err)=>{
-//     console.log(err.message)
-// })
+mongoose.connect(process.env.DB_URI).then(()=>{
+    console.log("db connected ")
+  
+}).catch((err)=>{
+    console.log(err.message)
+})
 
 
 
@@ -23,7 +25,7 @@ app.use(cors())
 
 app.use("/auth",authRouter)
 
-const port=process.env.port
+const port=process.env.PORT
 app.listen(port,()=>{
     console.log(`server listening on port ${port}`)
 })
