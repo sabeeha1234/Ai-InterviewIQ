@@ -71,11 +71,11 @@ function App() {
         <>
         <div className='h-screen flex'>
           {
-            !isbarhidden && <div className='border w-36'>
+            !isbarhidden && <div className='shadow-2xl w-36'>
               <SideBar/>
               </div>
           }
-          <div className='w-full'>
+          <div className='w-full overflow-auto'>
             <Outlet/>
           </div>
 

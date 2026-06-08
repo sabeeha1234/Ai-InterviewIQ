@@ -10,7 +10,7 @@ function Signup() {
     email: "",
     password: "",
     confirmPassword: "",
-    age: 0,
+    dob: " ",
     phone: "",
   }); //this  is js so u wrote it inn camelcase
 
@@ -50,7 +50,7 @@ function Signup() {
     const body ={
         name:formValues.name,
         email:formValues.email,
-        age:formValues.age,
+        dob:formValues.dob,
         phone:formValues.phone,
         password:formValues.password
     }
@@ -127,13 +127,13 @@ function Signup() {
             />
           </div>
           <div>
-            <label htmlFor="age">Age</label>
+            <label htmlFor="age">dob</label>
             <input
               className="border"
-              type="number"
-              name="age"
-              id="age"
-              value={formValues.age}
+              type="date"
+              name="dob"
+              id="dob"
+              value={formValues.dob}
               onChange={updateFormData}
             />
           </div>

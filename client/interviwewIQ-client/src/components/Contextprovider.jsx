@@ -4,11 +4,19 @@ export const UserProvider = createContext()
 
 function Contextprovider({children}) {
     const [userdetails,setuserdetails]=useState({})
-    useEffect(()=>{
-        const  newdetails=JSON.parse(localStorage.getItem("user"))
-        setuserdetails(newdetails)
+  
+    console.log("RAW:", localStorage.getItem("user"))
+console.log("PARSED:", JSON.parse(localStorage.getItem("user")))
 
-    },[])
+    useEffect(() => {
+  const newdetails = JSON.parse(localStorage.getItem("user"));
+
+  console.log("localStorage user:", newdetails);
+
+  setuserdetails(newdetails);
+}, []);
+
+console.log("Provider state:", userdetails);
   return (
 
    <>
