@@ -1,6 +1,7 @@
 import React from 'react'
 
-function UpdateProfile({setiseditenabeled}) {
+function PopUp({setiseditenabeled ,RenderComponent}) {
+  if(!RenderComponent)return null
   return (
     <div className='absolute h-[400px] shadow-2xl flex  bg-amber-50 left-[25%] w-[400px'>UpdateProfile
     
@@ -8,9 +9,7 @@ function UpdateProfile({setiseditenabeled}) {
         <div className=' flex justify-end'>
             <button  onClick={()=>setiseditenabeled(false)}>Close</button>
         </div>
-        <div>
-            <form></form>
-        </div>
+       <RenderComponent/>
     </div>
     
     
@@ -18,4 +17,4 @@ function UpdateProfile({setiseditenabeled}) {
   )
 }
 
-export default UpdateProfile
+export default PopUp

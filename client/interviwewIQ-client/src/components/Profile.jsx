@@ -1,7 +1,9 @@
 import { useContext, useState } from "react"
 import { UserProvider } from "./Contextprovider"
 import moment from 'moment'
-import UpdateProfile from "./UpdateProfile"
+
+import PopUp from "./PopUp"
+import UpdateProfileForm from "./UpdateProfileForm"
 
 
 function Profile() {
@@ -22,7 +24,7 @@ function Profile() {
   }
   return (
     <div className="h-screen relative">
-   {iseditenabeled?<UpdateProfile setiseditenabeled={setiseditenabeled}/>:null}
+   {iseditenabeled?<PopUp setiseditenabeled={setiseditenabeled} RenderComponent={UpdateProfileForm}/>:null}
       <div className="h-40 mt-10 border">
         <div className="flex justify-end">
           <button className="mr-2 cursor-pointer"  onClick={() => setiseditenabeled(!iseditenabeled)}>Edit</button>
