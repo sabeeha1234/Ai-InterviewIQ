@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 function Signup() {
   const [formValues, setFormValues] = useState({
@@ -64,8 +65,8 @@ function Signup() {
     navigate("/login")
 
     }catch(err){
-        console.log(err.message)
-        toast.error(err.message)
+        // console.log(err.message)
+        toast.error(err.response.data.message)
     }
 
    
@@ -153,7 +154,9 @@ function Signup() {
             <input type="submit" value="Submit" />
           </div>
         </form>
-        
+
+        <Link to="/login" >Login</Link>
+
 
       </div>
     </>
