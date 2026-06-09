@@ -2,10 +2,10 @@
 import jwt from 'jsonwebtoken'
 
 export function authmiddleware(req,res,next){
-    // const token = req.headers.authorization.split(' ')[1]
-    // if(!token){
-    //     res.status(401).json({message:`token not provded`})
-    // }
+    
+    if(!req.headers.authorization){
+        res.status(401).json({message:`token not provded`})
+    }
      const authHeader = req.headers.authorization;
 
     if (!authHeader) {
