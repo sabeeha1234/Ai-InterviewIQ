@@ -23,7 +23,7 @@ function speechtoText(){
 
 }
 let  recognition = null
-function startListeinng(){
+function startListeinng(onTranscript){
     //check if browser supports speech recognition
     const speechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 
@@ -37,15 +37,25 @@ function startListeinng(){
 
     recognition.lang="en-US"
     
-    //recognition.continous=true
+    recognition.continuous = true
 
-    //listen to all text and return this way this this is this is my this is my answer 
-    //recognition.intermiResults=true
+    //listen to all text and return this way 
+    // this this is this is my this is my answer 
+    recognition.intermiResults=true
 
     //execute when spoke
 
     recognition.onresult=(data)=>{
         console.log(data,"data from result event ")
+        let transcript=""
+        console.log(data.results)
+        for(let i=0;i<data.results.length;i++){
+            transcript+=data.results[i][0].transcript+" "
+        }
+            console.log("TRANSCRIPT:", transcript)
+   
+        onTranscript(transcript)
+       
     }
  
     //start listening
@@ -53,6 +63,9 @@ function startListeinng(){
 }
 
 function stopListening(){
+    if(recognition){
+        recognition.stop()
+    }
 
 }
-export{texttoSpeech,speechtoText}
+export{texttoSpeech,speechtoText,startListeinng,stopListening}
