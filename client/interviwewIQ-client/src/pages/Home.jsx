@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import { toast } from "react-toastify";
 import { api } from "../apis/interceptors";
+import socket from "../InterviewSockets.js";
+import { texttoSpeech } from "../utils/speech.js";
 
 function Home() {
   const aiContentContainer=useRef()
@@ -28,21 +30,44 @@ function Home() {
     console.log("calling ai",userText)
   
  }
- 
 
+ function sendfirstmessage(){
+  socket.emit("first-message",{message:"lets start interview"})
+ }
+ 
+useEffect(()=>{
+ socket.connect()
+ socket.on("confirm-password",(data)=>{
+  console.log("data for comnforming interview",data)
+
+  if(data.message){
+    texttoSpeech(data.message)
+  }
+ });
+ return ()=>{
+  
+  socket.off("confirm-password")
+
+   socket.disconnect()
+ }
+},[])
 
 //   useEffect(()=>{
 //   aiContentContainer.current.innerText =airesponse
 //  },[])
   return (
-    <div className="h-[900px]">
-    <form  className="flex justify-center gap-4 mt-4" onSubmit={callAI}>
+    <div className="h-[900px] flex flex-col">
+    {/*<form  className="flex justify-center gap-4 mt-4" onSubmit={callAI}>
       <textarea type="text" className="w-80 border shadow-2xl " placeholder="Ask AI" onChange={(e)=>setUserText(e.target.value)}/>
       <input type="submit" value="submit" disabled={!userText.length?true:false} className={` ${!userText.length ?"bg-white":"bg-blue-600 cursor-pointer" }  rounded`} />
     </form>
     <div ref={aiContentContainer}>   </div>
-      
+      */}
+      <button onClick={sendfirstmessage}>Send First Message</button>
+      <button>Get Interview Question</button>
 
+
+      <button onClick={()=>texttoSpeech}>Speak</button>
 
     </div>
   )
