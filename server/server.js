@@ -33,11 +33,13 @@ app.use("/user",userRouter)
 app.use("/interview",interviewRouter)
 
 //create new server for socket io
-const server = http.createServer()
+const server = http.createServer(app)
 //create innstance for socket.io by proving server info
-const io = new Server(server ,{
-    cors:"*",
-    methods:["GET","POST"]
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
 })
 //once connection io established exec callback
 io.on("connection",(socket)=>{

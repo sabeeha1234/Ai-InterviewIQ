@@ -1,5 +1,5 @@
 import {toast} from 'react-toastify'
-function texttoSpeech(text){
+function texttoSpeech(text,setAispeaking,onComplete){
 
     if(!text)return toast("text is not provided to speak")
    const  speechSynthesis = window.speechSynthesis
@@ -13,6 +13,17 @@ function texttoSpeech(text){
     speechSynthesis.cancel()
 
     const utterance = new SpeechSynthesisUtterance(text)
+    utterance.onstart=()=>{
+        setAispeaking(true)
+    }
+    utterance.onend = () => {
+        setAispeaking(false)
+
+        if (onComplete) {
+            onComplete()
+        }
+    }
+
     console.log(utterance,"utterance")
    speechSynthesis.speak(utterance)
 
@@ -41,7 +52,7 @@ function startListeinng(onTranscript){
 
     //listen to all text and return this way 
     // this this is this is my this is my answer 
-    recognition.intermiResults=true
+    recognition.interimResults=true
 
     //execute when spoke
 
@@ -53,7 +64,7 @@ function startListeinng(onTranscript){
             transcript+=data.results[i][0].transcript+" "
         }
             console.log("TRANSCRIPT:", transcript)
-   
+        //usally was setanswer(speech)
         onTranscript(transcript)
        
     }
